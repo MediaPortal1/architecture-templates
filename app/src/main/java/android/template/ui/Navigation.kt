@@ -16,21 +16,32 @@
 
 package android.template.ui
 
+import android.template.core.navigation.Navigator
+import android.template.core.navigation.Route
+import android.template.ui.mymodel.MyModelScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import android.template.ui.mymodel.MyModelScreen
+import androidx.navigation3.NavDisplay
+import androidx.navigation3.entryProvider
+import kotlinx.serialization.Serializable
+
+@Serializable
+private data object MainRoute : Route.TopLevel
 
 @Composable
 fun MainNavigation() {
-    val navController = rememberNavController()
+    val navigator = remember { Navigator(startRoute = MainRoute) }
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { MyModelScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
-    }
+    NavDisplay(
+        backStack = navigator.backStack,
+        onBack = { navigator.goBack() },
+        entryProvider = entryProvider {
+            entry<MainRoute> {
+                MyModelScreen(modifier = Modifier.padding(16.dp))
+            }
+        },
+    )
 }

@@ -26,7 +26,7 @@ plugins {
 
 android {
     namespace = "android.template"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "android.template"
@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(project(":core:navigation"))
 
     // Hilt Dependency Injection
     implementation(libs.hilt.android)
@@ -101,7 +102,7 @@ dependencies {
     // Arch Components
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
