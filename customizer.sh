@@ -42,7 +42,7 @@ do
   echo "Moving files to $n/java/$SUBDIR"
   mv $n/java/android/template/* $n/java/$SUBDIR
   echo "Removing old $n/java/android/template"
-  rm -rf mv $n/java/android
+  rm -rf $n/java/android
 done
 
 # Rename package and imports
@@ -79,7 +79,7 @@ find ./ -name "mymodel" -type d  | sed "p;s/mymodel/${DATAMODEL,,}/" |  tr '\n' 
 if [[ $APPNAME != MyApplication ]]
 then
     echo "Renaming app to $APPNAME"
-    find ./ -type f \( -name "MyApplication.kt" -or -name "settings.gradle.kts" -or -name "*.xml" \) -exec sed -i.bak "s/MyApplication/$APPNAME/g" {} \;
+    find ./ -type f \( -name "*.kt" -or -name "*.kts" -or -name "*.xml" \) -exec sed -i.bak "s/MyApplication/$APPNAME/g" {} \;
     find ./ -name "MyApplication.kt" | sed "p;s/MyApplication/$APPNAME/" | tr '\n' '\0' | xargs -0 -n 2 mv
     find . -name "*.bak" -type f -delete
 fi
